@@ -1,15 +1,22 @@
 package in.allstates.dto;
 
-import in.allstates.bindings.InsurancePlanCustomers;
+
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
+
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
+@ToString
+
 public class CustomerDto {
 	
-	private InsurancePlanCustomers customers;
-
+	private String customerName;
+	private String customerEmail;
+	private String customerPhoneNumber;
+	private String customerGender;
+	private Long CustomerSSN;
 }

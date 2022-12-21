@@ -1,12 +1,10 @@
 package in.allstates.bindings;
 
-import javax.persistence.CascadeType;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -16,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
+@NoArgsConstructor	
 @Table(name="INSURANCE_PLAN_CUSTOMERS")
 public class InsurancePlanCustomers {
 	
@@ -39,10 +37,10 @@ public class InsurancePlanCustomers {
 	@Column(name="Customer_SSN")
 	private Long CustomerSSN;
 	
-	@OneToOne(targetEntity = InsurancePlan.class, cascade = CascadeType.ALL)
-	@JoinColumn(name="Insurance_Id_fk")
-	private InsurancePlan insurancePlan;
+	@Column(name="Plan_Name")
+	private String planName;
 	
+	@Column(name="Plan_Status")
+	private String planStatus;
 	
-
 }
