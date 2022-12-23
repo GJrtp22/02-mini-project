@@ -162,7 +162,7 @@ public class ReportGenerator {
 		document.add(table);
 		document.close();
 
-		return null;
+		return "Successfully downloaded";
 	}
 
 }
