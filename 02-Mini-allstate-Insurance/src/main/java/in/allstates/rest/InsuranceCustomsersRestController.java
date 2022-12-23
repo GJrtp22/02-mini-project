@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.itextpdf.text.DocumentException;
 
 import in.allstates.bindings.InsurancePlanCustomers;
 import in.allstates.bindings.SearchRequest;
@@ -43,16 +44,8 @@ public class InsuranceCustomsersRestController {
 	}
 	
 	@GetMapping("/{reportType}")
-	public String generateReport(HttpServletResponse httpServletResponse, @PathVariable String reportType ) throws IOException
+	public String generateReport(HttpServletResponse httpServletResponse, @PathVariable String reportType ) throws IOException, DocumentException
 	{
-		httpServletResponse.setContentType("application/octet-stream");
-		
-		String headerkey="Content-Disposition";
-		String headervalue="attachment;filename=InsurancePlanCustomers.xls";
-		
-		httpServletResponse.setHeader(headerkey, headervalue);
-		
-		
 		
 		return insuranceService.generateReport(httpServletResponse, reportType);
 		

@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
+import com.itextpdf.text.DocumentException;
+
 import in.allstates.bindings.InsurancePlanCustomers;
 import in.allstates.bindings.SearchRequest;
 import in.allstates.constants.AllStatesConstants;
@@ -24,7 +26,7 @@ public class InsurnaceServiceImplemetation implements InsuranceService{
 	
 	
 
-	public List<InsurancePlanCustomers> insurancePlanCustomers=new ArrayList<>();
+	private List<InsurancePlanCustomers> insurancePlanCustomers=new ArrayList<>();
 	
 	@Autowired
 	private InsurancePlanCustomersRepository insurancePlanCustomersRepository;
@@ -111,14 +113,14 @@ public class InsurnaceServiceImplemetation implements InsuranceService{
 	}
 	
 	@Override
-	public String generateReport(HttpServletResponse response, String reportType) throws IOException {
+	public String generateReport(HttpServletResponse response, String reportType) throws IOException, DocumentException {
 		if(reportType.equalsIgnoreCase(AllStatesConstants.EXCEL))
 		{
 			return reportGenerator.downloadToExcel(insurancePlanCustomers, response);			
 		}
 		if(reportType.equalsIgnoreCase(AllStatesConstants.PDF))
 		{
-			reportGenerator.downloadToPdf(insurancePlanCustomers);
+			reportGenerator.downloadToPdf(insurancePlanCustomers, response);
 		}
 		return "failed to download";
 		

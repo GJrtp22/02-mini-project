@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Service;
 
+import com.itextpdf.text.DocumentException;
 
 import in.allstates.bindings.InsurancePlanCustomers;
 import in.allstates.bindings.SearchRequest;
@@ -21,7 +22,7 @@ public interface InsuranceService {
 	
 	public List<InsurancePlanCustomers> getPlanCusotmers(SearchRequest searchRequest);
 	
-	public String generateReport(HttpServletResponse response, String reportType) throws IOException;
+	public String generateReport(HttpServletResponse response, String reportType) throws IOException, DocumentException;
 	
 	
 	
