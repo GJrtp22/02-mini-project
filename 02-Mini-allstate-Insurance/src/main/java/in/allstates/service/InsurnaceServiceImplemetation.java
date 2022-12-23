@@ -1,13 +1,14 @@
 package in.allstates.service;
 
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
+
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import in.allstates.bindings.InsurancePlanCustomers;
@@ -62,7 +63,7 @@ public class InsurnaceServiceImplemetation implements InsuranceService{
 	
 	
 
-	@Override
+	/*@Override
 	public List<InsurancePlanCustomers> getPlanCusotmers(SearchRequest searchRequest) {
 		if(searchRequest.getPlanName()!=null && searchRequest.getPlanStatus()!=null) {	
 			
@@ -83,20 +84,45 @@ public class InsurnaceServiceImplemetation implements InsuranceService{
 		
 		insurancePlanCustomers= insurancePlanCustomersRepository.findAll();
 		return insurancePlanCustomers;
-	}
-
+	}*/
+	
 	@Override
-	public String generateReport(String reportType) {
+	public List<InsurancePlanCustomers> getPlanCusotmers(SearchRequest searchRequest) {
+		
+		
+		InsurancePlanCustomers entity=new InsurancePlanCustomers();
+		
+	
+		if(searchRequest.getPlanName()!=null && !searchRequest.getPlanName().equals("")) {	
+			
+			entity.setPlanName(searchRequest.getPlanName());
+				
+		}
+		
+		if(searchRequest.getPlanStatus()!=null && !searchRequest.getPlanStatus().equals(""))
+		{
+			entity.setPlanStatus(searchRequest.getPlanStatus());
+		}
+		
+		Example<InsurancePlanCustomers> entityQuery = Example.of(entity);
+		
+		insurancePlanCustomers= insurancePlanCustomersRepository.findAll(entityQuery);
+		return insurancePlanCustomers;
+	}
+	
+	@Override
+	public String generateReport(HttpServletResponse response, String reportType) throws IOException {
 		if(reportType.equalsIgnoreCase(AllStatesConstants.EXCEL))
 		{
-			return reportGenerator.downloadToExcel(insurancePlanCustomers);			
+			return reportGenerator.downloadToExcel(insurancePlanCustomers, response);			
 		}
 		if(reportType.equalsIgnoreCase(AllStatesConstants.PDF))
 		{
-			return reportGenerator.downloadToPdf(insurancePlanCustomers);
+			reportGenerator.downloadToPdf(insurancePlanCustomers);
 		}
+		return "failed to download";
 		
-		return null;
+		
 	
 		
 	}

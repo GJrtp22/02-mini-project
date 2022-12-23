@@ -1,6 +1,9 @@
 package in.allstates.service;
 
+import java.io.IOException;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Service;
 
@@ -18,7 +21,7 @@ public interface InsuranceService {
 	
 	public List<InsurancePlanCustomers> getPlanCusotmers(SearchRequest searchRequest);
 	
-	public String generateReport(String reportType);
+	public String generateReport(HttpServletResponse response, String reportType) throws IOException;
 	
 	
 	

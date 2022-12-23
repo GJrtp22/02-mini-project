@@ -1,9 +1,13 @@
 package in.allstates.rest;
 
+import java.io.IOException;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -36,6 +40,22 @@ public class InsuranceCustomsersRestController {
 	public List<InsurancePlanCustomers> getCustomers(@RequestBody SearchRequest searchrequest)
 	{
 		return insuranceService.getPlanCusotmers(searchrequest);
+	}
+	
+	@GetMapping("/{reportType}")
+	public String generateReport(HttpServletResponse httpServletResponse, @PathVariable String reportType ) throws IOException
+	{
+		httpServletResponse.setContentType("application/octet-stream");
+		
+		String headerkey="Content-Disposition";
+		String headervalue="attachment;filename=InsurancePlanCustomers.xls";
+		
+		httpServletResponse.setHeader(headerkey, headervalue);
+		
+		
+		
+		return insuranceService.generateReport(httpServletResponse, reportType);
+		
 	}
 	
 }
