@@ -1,0 +1,31 @@
+Tables:
+Login_Table: id, email, password
+Users_Table: id, FirstName, lastName, Email,password, phno, DOb, gender, country, state, city, Active
+Country:
+State;
+city;
+Unlock Account;Email Id, temporarypwd, newpwd, confirmpwd
+
+Insert into CITY values('Proddatur');
+
+
+insert into COUNTRY (country_id  , country) values (1,'IND');
+insert into COUNTRY (country_id  , country) values (2,'IND');
+insert into COUNTRY (country_id  , country) values (3,'IND');
+insert into COUNTRY (country_id  , country) values (4,'RUS');
+insert into COUNTRY (country_id  , country) values (5,'AUS');
+insert into COUNTRY (country_id  , country) values (6,'UAS');
+insert into COUNTRY (country_id  , country) values (6,'UAS');
+insert into COUNTRY (country_id  , country) values (6,'IND');
+
+
+insert into state (101, 'AP', 1);
+insert into state (102, 'MP', 1)
+
+
+
+
+Functionalites:
+
+1. Implement Country, states, and cities requirement.
+2. 

@@ -1,0 +1,5 @@
+if(login.getUserName()!=null && !login.getUserName().isEmpty())
+		{
+			List<User> findByEmailANDPasswordANDActive = userRepo.findByEmailANDPasswordANDActive(login.getUserName(), login.getPassword());
+		}
+		// TODO Auto-generated method stub
