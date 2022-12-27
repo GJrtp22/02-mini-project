@@ -11,14 +11,15 @@ import in.umt.bindings.User;
 
 public interface UserRepo extends JpaRepository<User, Long> {
 	
-	boolean existsByEmail(String email);
 	
-	@Query("select password from User where email= : email")
-	String getPassword(String email);
 	
-	@Query("Update User set password= :password where email= :email")
-	void updatePassword(String email,String password);
+	//@Query("select password from User where email= : email")
+	//String getPassword(String email);
 	
+	
+	Optional<User> findByEmailAndPassword(String email, String password);
+
 	Optional<User> findByEmail(String email);
+	
 
 }

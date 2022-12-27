@@ -16,11 +16,11 @@ public interface UserManagementService {
 	
 	List<String> getCities(String state);
 	
-	boolean userExists(String email);
+	String userExists(String email);
 	
 	String saveUser(User user) throws MessagingException;
 	
-	String unLockAccount(String email);
+	String unLockAccount(UnlockAccount email);
 	
 	String forgotPasswordEmail(String email);
 	

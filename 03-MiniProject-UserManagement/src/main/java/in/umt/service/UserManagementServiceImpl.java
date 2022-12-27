@@ -21,10 +21,10 @@ import in.umt.util.PasswordGeneratorUtil;
 
 @Service
 public class UserManagementServiceImpl implements UserManagementService {
-	
+
 	@Autowired
 	private Mail mailsender;
-	
+
 	@Autowired
 	private LocationRepo locationRepo;
 
@@ -77,8 +77,15 @@ public class UserManagementServiceImpl implements UserManagementService {
 	}
 
 	@Override
-	public boolean userExists(String email) {
-		return userRepo.existsByEmail(email); 
+	public String userExists(String email) {
+		Optional<User> userRecord = userRepo.findByEmail(email);
+		if(userRecord.isPresent())
+		{
+			return "Email address is already registered, please try to login";
+		}
+		
+		return "Email cannot be empty";
+		
 	}
 
 	@Override
@@ -93,33 +100,36 @@ public class UserManagementServiceImpl implements UserManagementService {
 
 	}
 
-	//not yet completed
 	@Override
-	public String unLockAccount(String  email) {
-		
-		UnlockAccount account=new UnlockAccount();
-		if(account.getTemparoryPassword().equals(userRepo.getPassword(email)))
-		{	
-			userRepo.updatePassword(email, account.getNewPassword());
-			
+	public String unLockAccount(UnlockAccount account) {
+
+		Optional<User> userRecord = userRepo.findByEmailAndPassword(account.getEmailId(),
+				account.getTemparoryPassword());
+		if (userRecord.isPresent()) {
+			User user = userRecord.get();
+
+			user.setPassword(account.getNewPassword());
+			user.setActive(true);
+			userRepo.save(user);
+
+			return "Account unlocked, please proceed with login";
+
 		}
-				
-		return null;
+
+		return "failed to unlock account, please try again";
 	}
 
 	@Override
 	public String forgotPasswordEmail(String email) {
-		 Optional<User> user = userRepo.findByEmail(email);
-		if(user.isPresent())
-		{
+		Optional<User> user = userRepo.findByEmail(email);
+		if (user.isPresent()) {
 			user.get().setPassword(PasswordGeneratorUtil.generateSecurePassword());
-			userRepo.updatePassword(email, user.get().getPassword());
-			mailsender.sendSimpleEmail(user.get().getFirstName(), user.get().getLastName(), user.get().getPassword(), user.get().getEmail());
+			userRepo.save(user.get());
+			mailsender.sendForgetPasswordEmail(user.get().getFirstName(), user.get().getLastName(), user.get().getPassword(),
+					user.get().getEmail());
 			return "Please check your email inbox to unlock account..";
 		}
 		return "emailId is not registered, please enter registered email";
 	}
-
-	
 
 }
