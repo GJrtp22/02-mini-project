@@ -79,13 +79,12 @@ public class UserManagementServiceImpl implements UserManagementService {
 	@Override
 	public String userExists(String email) {
 		Optional<User> userRecord = userRepo.findByEmail(email);
-		if(userRecord.isPresent())
-		{
+		if (userRecord.isPresent()) {
 			return "Email address is already registered, please try to login";
 		}
-		
+
 		return "Email cannot be empty";
-		
+
 	}
 
 	@Override
@@ -125,11 +124,26 @@ public class UserManagementServiceImpl implements UserManagementService {
 		if (user.isPresent()) {
 			user.get().setPassword(PasswordGeneratorUtil.generateSecurePassword());
 			userRepo.save(user.get());
-			mailsender.sendForgetPasswordEmail(user.get().getFirstName(), user.get().getLastName(), user.get().getPassword(),
-					user.get().getEmail());
+			mailsender.sendForgetPasswordEmail(user.get().getFirstName(), user.get().getLastName(),
+					user.get().getPassword(), user.get().getEmail());
 			return "Please check your email inbox to unlock account..";
 		}
 		return "emailId is not registered, please enter registered email";
+	}
+
+	@Override
+	public String signIn(Login login) {
+		Optional<User> userRecord = userRepo.findByEmailAndPassword(login.getUserName(), login.getPassword());
+
+		if (userRecord.isEmpty()) {
+			return "Invalid Credentials";
+		}
+
+		if (!userRecord.get().isActive()) {
+			return "Your Account Is Locked";
+		}
+
+		return "Welcome to Ashok IT….";
 	}
 
 }

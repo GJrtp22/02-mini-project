@@ -55,7 +55,7 @@ public class MailSMTPUtil implements Mail {
 		mailSender.send(message);
 
 	}
-	
+
 	@Override
 	public void sendForgetPasswordEmail(String firstName, String lastName, String password, String to) {
 		String from = "govardhan.jrtp@gmail.com";
@@ -63,8 +63,7 @@ public class MailSMTPUtil implements Mail {
 		String content = "Hi" + firstName + "," + lastName + " :\n"
 				+ "        Please unlock your account using below one time password \n"
 				+ "         Please set your password by using temporary password below \n"
-				+ "		  Temporary Password: " + password + "	\n" + "Thanks,\n"
-				+ "IES Team";
+				+ "		  Temporary Password: " + password + "	\n" + "Thanks,\n" + "IES Team";
 
 		SimpleMailMessage message = new SimpleMailMessage();
 		message.setFrom(from);

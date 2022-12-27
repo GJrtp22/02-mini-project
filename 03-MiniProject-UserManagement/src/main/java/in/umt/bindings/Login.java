@@ -1,7 +1,5 @@
 package in.umt.bindings;
 
-
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,8 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Login {
-	
-	
+
 	private String userName;
 	private String password;
 

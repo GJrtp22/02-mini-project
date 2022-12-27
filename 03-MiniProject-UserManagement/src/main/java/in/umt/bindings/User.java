@@ -31,7 +31,7 @@ public class User {
 	private Long Id;
 	private String firstName;
 	private String lastName;
-	//@Column(unique=true)
+	@Column(unique=true)
 	private String email;
 	private String phoneNumber;
 	private Date dob;
