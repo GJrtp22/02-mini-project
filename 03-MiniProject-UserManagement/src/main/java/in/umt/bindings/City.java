@@ -5,6 +5,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,9 +20,13 @@ import lombok.NoArgsConstructor;
 @Table(name="CITY")
 public class City {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	
 	private Long Id;
 	private String city;
+	
+	@ManyToOne
+	@JoinColumn(name="fk_stateId")
+	private State state;
 	
 	
 }

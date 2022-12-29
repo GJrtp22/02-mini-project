@@ -23,15 +23,15 @@ import lombok.NoArgsConstructor;
 @Table(name="COUNTRY")
 public class Country {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	
 	@Column(name="countryId")
 	private Long Id;
 	
 	private String countryName;
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	/*@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name="fk_country_Id", referencedColumnName = "countryId")
-	private List<State> states;
+	private List<State> states;*/
 	
 	
 	

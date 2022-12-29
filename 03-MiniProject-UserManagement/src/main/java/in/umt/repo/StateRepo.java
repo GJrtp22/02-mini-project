@@ -9,7 +9,7 @@ import in.umt.bindings.State;
 
 public interface StateRepo extends JpaRepository<State, Long> {
 	
-	@Query("SELECT distinct(sc.city) FROM State S join S.cities sc where state= :stateName")
-	public List<String> getCities(String stateName);
+	@Query("SELECT distinct(S.state) FROM State S join S.country sc where sc.countryName= :country")
+	public List<String> getStates(String country);
 
 }

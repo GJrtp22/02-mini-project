@@ -36,6 +36,9 @@ public class UserManagementServiceImpl implements UserManagementService {
 
 	@Autowired
 	private StateRepo stateRepo;
+	
+	@Autowired
+	private CityRepo cityRepo;
 
 	// @Override
 	public List<String> getCountries() {
@@ -47,16 +50,18 @@ public class UserManagementServiceImpl implements UserManagementService {
 	@Override
 	public List<String> getStates(String country) {
 
-		return countryRepo.getStates(country);
+		return stateRepo.getStates(country);
+		
 	}
 
 	@Override
 	public List<String> getCities(String state) {
 
-		return stateRepo.getCities(state);
+		return cityRepo.getCities(state);
+		
 	}
 
-	// same implementaion with single table
+	/* same implementaion with single table
 
 	@Override
 	public List<String> getDistinctCountries() {
@@ -74,7 +79,7 @@ public class UserManagementServiceImpl implements UserManagementService {
 	public List<String> getCitiesByState(String state) {
 
 		return locationRepo.getCitiesByState(state);
-	}
+	}*/
 
 	@Override
 	public String userExists(String email) {

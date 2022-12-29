@@ -26,10 +26,10 @@ public interface UserManagementService {
 
 	String signIn(Login login);
 
-	List<String> getDistinctCountries();
+	//List<String> getDistinctCountries();
 
-	List<String> getStatesBycountry(String country);
+	//List<String> getStatesBycountry(String country);
 
-	List<String> getCitiesByState(String state);
+	//List<String> getCitiesByState(String state);
 
 }

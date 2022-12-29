@@ -44,32 +44,6 @@ public class UserManagementRestController {
 
 	}
 
-	@PostMapping("/saveLocation")
-	public ResponseEntity<String> saveCountry(@RequestBody List<Location> location) {
-		locationRepo.saveAll(location);
-
-		return ResponseEntity.ok("Data saved");
-
-	}
-
-	@GetMapping("/countries")
-	public List<String> getCountries() {
-		return managementService.getDistinctCountries();
-	}
-
-	@GetMapping("/states/{country}")
-	public List<String> getStates(@PathVariable String country) {
-
-		return managementService.getStatesBycountry(country);
-
-	}
-
-	@GetMapping("/cities/{state}")
-	public List<String> getCities(@PathVariable String state) {
-		return managementService.getCitiesByState(state);
-
-	}
-
 	@GetMapping("/email")
 	public String userExists(String email) {
 		return managementService.userExists(email);
@@ -77,7 +51,7 @@ public class UserManagementRestController {
 	}
 
 	@GetMapping("/email/{emailId}")
-	public String forgotPasswordEmail(@PathVariable String emailId) {
+	public String forgotPassword(@PathVariable String emailId) {
 		return managementService.forgotPasswordEmail(emailId);
 	}
 
@@ -91,31 +65,22 @@ public class UserManagementRestController {
 		return managementService.signIn(login);
 	}
 
-	/*
-	 * @PostMapping("/save") public ResponseEntity<String> saveCountry(@RequestBody
-	 * List<Country> country) { countryRepo.saveAll(country);
-	 * 
-	 * return ResponseEntity.ok("Data saved");
-	 * 
-	 * 
-	 * }
-	 */
+	@GetMapping("/countries")
+	public List<String> getCountries() {
+		return managementService.getCountries();
+	}
 
-	/*
-	 * @GetMapping("/countries") public List<String> getCountries() { return
-	 * managementService.getCountries(); }
-	 * 
-	 * @GetMapping("/states/{country}") public List<String> getStates(@PathVariable
-	 * String country) {
-	 * 
-	 * return managementService.getStates(country);
-	 * 
-	 * }
-	 * 
-	 * @GetMapping("/cities/{state}") public List<String> getCities(@PathVariable
-	 * String state) { return managementService.getCities(state);
-	 * 
-	 * }
-	 */
+	@GetMapping("/states/{country}")
+	public List<String> getStates(@PathVariable String country) {
+
+		return managementService.getStates(country);
+
+	}
+
+	@GetMapping("/cities/{state}")
+	public List<String> getCities(@PathVariable String state) {
+		return managementService.getCities(state);
+
+	}
 
 }
