@@ -44,13 +44,13 @@ public class UserManagementRestController {
 
 	}
 
-	@GetMapping("/email")
-	public String userExists(String email) {
+	@GetMapping("/email/{emailId}")
+	public String userExists(@PathVariable String email) {
 		return managementService.userExists(email);
 
 	}
 
-	@GetMapping("/email/{emailId}")
+	@GetMapping("/forget/{emailId}")
 	public String forgotPassword(@PathVariable String emailId) {
 		return managementService.forgotPasswordEmail(emailId);
 	}
