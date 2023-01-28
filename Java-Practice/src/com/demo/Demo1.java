@@ -1,41 +1,39 @@
 package com.demo;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
-public class Demo1 implements Example{
-	
-	public Demo1()
-	{
-		System.out.println("super class");
-		System.out.println(Example.a);
-	}
+public class Demo1 implements Example {
 
-	
-
-}
-
-class Demo extends Demo1{
-	
-	public Demo()
-	{
-		super();
-	}
-public static void main(String[] args) {
-	
-	Demo d=new Demo();
-	
-	System.out.println(d instanceof Demo);
+	public static void main(String[] args) {
 		
-		int[] arr= {1,9,45,7,5};
+		List<Integer> l1=new ArrayList<>();
+		List<Integer> l2=new ArrayList<>();
+		
+		l1.add(10);
+		l1.add(20);
+		l1.add(30);
+		l1.add(20);
+		
+		l2.add(5);
+		
+		l2.addAll(1,l1);
+		//l2.add(1, 100);
+		
+		//Integer integer = l2.get(0);
+		
+		//l2.remove(1);
+		
+		l2.set(1, 99);
+		
+		Integer integer=l2.indexOf(l1);
 		
 		
-		 int[] copyOf = Arrays.copyOf(arr, 9);
-		for(int i: copyOf)
-		{
-			System.out.println(i);
-		}
-
+		
+		//l1.stream().forEach(System.out::print);
+		System.out.println();
+		System.out.println(integer);
+		l2.stream().forEach(System.out::print);
 	}
-	
-	
 }

@@ -40,6 +40,7 @@ public class UserManagementRestController {
 	@PostMapping("/signup")
 	public String saveUser(@RequestBody User user) throws MessagingException {
 
+		
 		return managementService.saveUser(user);
 
 	}

@@ -12,6 +12,5 @@ public interface CityRepo extends JpaRepository<City, Long> {
 	@Query("SELECT distinct(C.city) FROM City C join C.state sc where sc.state= :state")
 	public List<String> getCities(String state);
 	
-	
 
 }

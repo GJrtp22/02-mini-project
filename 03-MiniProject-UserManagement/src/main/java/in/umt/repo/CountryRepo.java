@@ -11,6 +11,8 @@ public interface CountryRepo extends JpaRepository<Country, Long> {
 	
 	@Query("select distinct(countryName) from Country")
 	public List<String> getCountries();
+	
+	
 
 	
 
